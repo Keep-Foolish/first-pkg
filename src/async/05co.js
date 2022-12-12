@@ -23,4 +23,4 @@ function* createDiamonds() {
 // co(createDiamonds()).then(function (value) {
 //   console.log(value);
 // });
-co(createDiamonds())
+co(createDiamonds).then(() => console.log("函数执行结束"))
