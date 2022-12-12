@@ -1,0 +1,39 @@
+$content-color: green;
+
+@mixin front($color, $size) {
+  color: $color;
+  font-size: $size;
+}
+
+%box-module {
+  border-radius: 10px;
+  border: 2px solid yellow;
+}
+
+.head1 {
+  background-color: blue;
+  color: aquamarine;
+  width: 180px;
+}
+
+.body {
+  @include front(rgb(226, 63, 229), 30px);
+  .head2 {
+    @extend %box-module;
+    .content {
+      color: red;
+      &:hover {
+        background-color: black;
+      }
+    }
+  }
+}
+
+.head2 {
+  .head3:hover {
+    background-color: aqua;
+    & ~ .head4 {
+        background-color: black;
+      }
+  }
+}

@@ -1,0 +1,30 @@
+.body .head2 {
+  border-radius: 10px;
+  border: 2px solid yellow;
+}
+
+.head1 {
+  background-color: blue;
+  color: aquamarine;
+  width: 180px;
+}
+
+.body {
+  color: rgb(226, 63, 229);
+  font-size: 30px;
+}
+.body .head2 .content {
+  color: red;
+}
+.body .head2 .content:hover {
+  background-color: black;
+}
+
+.head2 .head3:hover {
+  background-color: aqua;
+}
+.head2 .head3:hover ~ .head4 {
+  background-color: black;
+}
+
+/*# sourceMappingURL=index.css.map */

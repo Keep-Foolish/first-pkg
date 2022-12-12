@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>天气实例</title>
+</head>
+
+<body>
+    <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.1/axios.min.js"></script>
+    <script>
+        //天气查询api 发起网络请求
+        // axios({
+        //     headers: {
+        //         authorization: `APPCODE 314d48fe65ad4682b968077b16fd454f`,
+        //     },
+        //     method: 'get',
+        //     url: `http://jisutqybmf.market.alicloudapi.com/weather/query`,
+        //     params: {
+        //         city: '镇江'
+        //     }
+        // }).then((res) => {
+        //     console.log(res.data)
+        // }).catch(error => {
+        //     console.log(error)
+        // })
+
+        function creatAxiosTask(city) {
+            const result = axios({
+                headers: {
+                    authorization: `APPCODE 314d48fe65ad4682b968077b16fd454f`,
+                },
+                method: 'get',
+                url: `http://jisutqybmf.market.alicloudapi.com/weather/query`,
+                params: {
+                    city,
+                }
+            })
+            //创建网络请求，返回一个promise对象
+            return result;
+        }
+        //promise数组作为promisall的参数
+        const promiseArry1 = [creatAxiosTask('镇江'), creatAxiosTask('合肥'), creatAxiosTask('上海')]
+        const promiseArry2 = [creatAxiosTask('镇江'), creatAxiosTask('合肥'), creatAxiosTask('上海')]
+        //promise.all传promise数组，同时返回多个异步结果,但必须都处于fulfill状态，否则执行catch
+        Promise.all(promiseArry2)
+            .then((res) => console.log(res))
+            .catch(errr => console.log(errr))
+        //promise.allsettled 传promise数组，对每个元素分别执行then或catch
+        Promise.allSettled([creatAxiosTask('镇江'), creatAxiosTask('合肥'), creatAxiosTask('上海')])
+            .then((a) => console.log(a))
+            .catch(error => console.log(error))
+
+        //序列化
+        creatAxiosTask('镇江')
+            .then((res) => {
+                console.log(res)
+                return creatAxiosTask('乌鲁木齐')
+            }).then((res) => {
+                console.log(res)
+                return creatAxiosTask('上海')
+            }).then((res) => {
+                console.log(res)})
+    </script>
+</body>
+
+</html>
